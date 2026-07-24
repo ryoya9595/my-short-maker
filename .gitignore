@@ -1,0 +1,11 @@
+node_modules/
+app/node_modules/
+output/*
+!output/.gitkeep
+app/public/faceless-audio/
+app/public/faceless-bg/
+app/public/bgm/*
+!app/public/bgm/.gitkeep
+__pycache__/
+*.pyc
+.DS_Store

@@ -1,0 +1,32 @@
+{
+  "title": "恋愛運が下がる部屋の特徴",
+  "engine": "gtts",
+  "speed": 1.5,
+  "img_style": "soft romantic warm tones, pink and cream, cozy dreamy interior, gentle morning light, high detail, no text, no letters, no people",
+  "cover": {
+    "img": "bright cozy feminine bedroom, soft pink and cream tones, morning light through window, plants and fresh flowers, cheerful and clean",
+    "img_style": "bright, soft pink and cream, natural daylight, high detail, no text, no letters, no people",
+    "dur_sec": 1.9,
+    "say": "恋愛運が下がる部屋の特徴",
+    "stroke": "#2a0a1a",
+    "lines": [
+      { "t": "恋愛運が", "c": "#FF3E8F" },
+      { "t": "下がる部屋の", "c": "#FF3E8F" },
+      { "t": "特徴", "c": "#FFC400" }
+    ]
+  },
+  "scenes": [
+    { "text": "実は、その部屋のせいで恋が来ないかも。", "emph": "恋が来ない",
+      "img": "lonely cozy bedroom at dusk, soft pink light, empty bed, melancholic romantic mood" },
+    { "text": "まず、ベッドから見て正面に鏡があるのはNGです。", "emph": "鏡",
+      "img": "a large mirror standing directly facing a bed in a soft pink bedroom" },
+    { "text": "寝ている姿が映ると、気が乱れて出会いを逃します。", "emph": "出会いを逃します",
+      "img": "a mirror reflecting an empty bed at night, dim dreamy light, unsettled mood" },
+    { "text": "次に、枯れた花やドライフラワー。", "emph": "ドライフラワー",
+      "img": "dried withered flowers in a vase on a shelf, faded petals, nostalgic dim light" },
+    { "text": "「終わった恋」の象徴で、新しい縁が入りません。", "emph": "新しい縁が入りません",
+      "img": "close up of wilting faded flowers, soft melancholic pink tones" },
+    { "text": "鏡は布で隠し、花は生花に。今日から恋が動き出す。", "emph": "今日から恋が動き出す",
+      "img": "bright cheerful bedroom with fresh pink roses in a vase, hopeful morning sunlight" }
+  ]
+}

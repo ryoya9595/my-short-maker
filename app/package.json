@@ -1,0 +1,21 @@
+{
+  "name": "my2-short-maker-app",
+  "version": "1.0.0",
+  "description": "Remotion renderer for my2-short-maker (faceless short video generator)",
+  "license": "ISC",
+  "type": "commonjs",
+  "scripts": {
+    "render": "remotion render src/index.ts FacelessShort ../output/short.mp4",
+    "studio": "remotion studio src/index.ts"
+  },
+  "dependencies": {
+    "@remotion/bundler": "^4.0.448",
+    "@remotion/cli": "^4.0.448",
+    "@remotion/renderer": "^4.0.448",
+    "@types/react": "^19.2.14",
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5",
+    "remotion": "^4.0.448",
+    "typescript": "^6.0.2"
+  }
+}

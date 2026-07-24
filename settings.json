@@ -1,0 +1,26 @@
+{
+  "_comment": "この人の『理想の型』＝全動画の土台。フィードバック（この声/このBGM/この色/このフォント/この背景）が来たらここを書き換えて育てる。1本ごとの台本は script.json 側。script.json に同じ項目があればそちらが優先。",
+
+  "speed": 1.5,
+  "engine": "gtts",
+
+  "voice": {
+    "engine": "gtts",
+    "note": "gTTSは日本語1声。声色を変えたい要望が来たら engine を有料TTS(ElevenLabs等)に切替、voice_id をここに記録して generate.py の synth を差し替える。"
+  },
+
+  "style": {
+    "caption_font": "\"Hiragino Sans\",\"Hiragino Kaku Gothic ProN\",\"Noto Sans JP\",sans-serif",
+    "emph_color": "#F5C542",
+    "caption_stroke": "#000000",
+    "cover_stroke": "#231200"
+  },
+
+  "img_style": "cinematic, moody dark gold tones, warm light, high detail, no text, no letters, no people",
+
+  "bgm": {
+    "file": "",
+    "volume": 0.08,
+    "note": "BGMを付ける時：mp3を app/public/bgm/ に置き、file を 'bgm/ファイル名.mp3' にする。volumeは0.05〜0.12が目安。"
+  }
+}
