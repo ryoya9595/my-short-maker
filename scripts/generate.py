@@ -174,22 +174,47 @@ def dur_seconds(path):
     ]).decode().strip()
     return float(out)
 
+_last_bg_at = 0.0
+BG_INTERVAL = 20  # Pollinationsの無料枠（登録なし）は約15秒に1回。詰めて送ると402/429で弾かれる（余裕を見て20秒）
+
 def fetch_bg(prompt, out_path, seed, style=None):
-    """Pollinations(無料AI画像)で背景を生成。失敗時はFalse。"""
+    """Pollinations(無料AI画像)で背景を生成。失敗時はFalse。
+    無料枠は15秒に1回なので、前回の取得から16秒空けてから送る。402/429なら20秒待って再挑戦。"""
+    global _last_bg_at
+    import time
     full = f"{prompt}, {style or IMG_STYLE}"
     enc = urllib.parse.quote(full)
     url = f"https://image.pollinations.ai/prompt/{enc}?width=1080&height=1920&nologo=true&seed={seed}"
-    for attempt in range(3):
+    for attempt in range(4):
+        wait = BG_INTERVAL - (time.time() - _last_bg_at)
+        if wait > 0:
+            print(f"  bg: 無料枠の間隔を空けて待機 {wait:.0f}s")
+            time.sleep(wait)
         try:
             req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
-            with urllib.request.urlopen(req, timeout=90) as r:
+            with urllib.request.urlopen(req, timeout=120) as r:
+                ctype = r.headers.get("Content-Type", "")
                 data = r.read()
-            if len(data) > 5000:
-                with open(out_path, "wb") as f:
+            _last_bg_at = time.time()
+            if ctype.startswith("image/") and len(data) > 5000:
+                raw_path = out_path + ".raw.jpg"
+                with open(raw_path, "wb") as f:
                     f.write(data)
+                # 登録なしの無料枠は右下に「pollinations.ai」のロゴが入るので、下端7%を切り落として元のサイズに戻す
+                try:
+                    subprocess.run(["ffmpeg","-y","-i",raw_path,"-vf","crop=iw:ih*0.93:0:0,scale=1080:1920",out_path],
+                                   check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                    os.remove(raw_path)
+                except Exception:
+                    os.replace(raw_path, out_path)
                 return True
+            print(f"  bg retry {attempt+1}: 画像ではない応答 ({ctype}, {len(data)} bytes)")
         except Exception as e:
-            print(f"  bg retry {attempt+1}: {e}")
+            _last_bg_at = time.time()
+            msg = str(e)
+            print(f"  bg retry {attempt+1}: {msg}")
+            if "402" in msg or "429" in msg:
+                time.sleep(20)
     return False
 
 def synth(text, wav):
